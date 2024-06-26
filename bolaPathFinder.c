@@ -156,7 +156,7 @@ int main(){
 			
 			// limpa a tela e imprime as informacoes
 			system("cls");
-			printf("Bolinha: andar-%d x-%d y-%d\n", bolinha[0], bolinha[1], bolinha[2]);
+			printf("Bolinha: andar(%d) linha(%d) coluna(%d)\n", bolinha[0], bolinha[1], bolinha[2]);
 			printf("Movimento: %c\n", movimento);
 			
 			for(i = 0; i < 5; i++){
@@ -175,14 +175,20 @@ int main(){
 			printf("\n");
 			sleep(1);
 		}
+		// o player desce um andar contando mais um passo
 		bolinha[0]++;
 		passosPorAndar++;
+		
+		// reset das variaveis que controlam a direcao do player
 		movimento = 'u';
 		distanciaAux = 12;
+		
+		// soma a quantidade de passos no andar e depois reseta
 		contadorPassos += passosPorAndar;
 		passosPorAndar = 0;
 	}while(bolinha[0] <= 9);
 	
+	// calcula e imprime a media de passos
 	float mediaPassos = (float)contadorPassos/10;
 	printf("\nMedia de passos por andar: %.2f", mediaPassos);
 	
