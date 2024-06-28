@@ -34,6 +34,27 @@ int main(){
 	bolinha[1] = rand() % 5;  
 	bolinha[2] = rand() % 5;
 	
+	// impressao da matriz
+	printf("Andares do predio:\n");
+	sleep(1);
+	for(i = 0; i < 10; i++){
+		for(j = 0; j < 5; j++){
+			for(k = 0; k < 5; k++){
+				// imprimir x na posicao do player sem alterar a matriz dos andares
+				if(i == bolinha[0] && j == bolinha[1] && k == bolinha[2]){
+					printf("x "); 
+				}
+				else{
+					printf("%c ", andares[i][j][k]);
+				}
+			}
+			printf("\n");
+		}
+		printf("\n");
+	}
+	sleep(3);
+	system("cls");
+	
 	// iniciar a variavel dos movimentos possiveis do player
 	char movimento = 'u';
 	
@@ -46,7 +67,8 @@ int main(){
 	   passos por andar e necessario pois no comeco de cada andar
 	   e feita a tomada de decisao da direcao com base
 	*/
-	int contadorPassos = 0, passosPorAndar = 0;
+	int contadorPassos = 0;
+	int passosPorAndar[10] = {0};
 	
 	// criacao do loop de busca da bolinha
 	do{
@@ -75,53 +97,48 @@ int main(){
 					case 'u':
 						if(bolinha[1] != 0){
 							bolinha[1]--;
-							passosPorAndar++;
 						}
 						else{
-							if(passosPorAndar > 2){
+							if(passosPorAndar[bolinha[0]] > 2){
 								movimento = 'r';
 								bolinha[2]++;
-								passosPorAndar++;
 							}
 							else{
 								movimento = 'd';
 								bolinha[1]++;
-								passosPorAndar++;
 							}
 						}
+						passosPorAndar[bolinha[0]]++;
 						break;
 					case 'd':
 						if(bolinha[1] != 4){
 							bolinha[1]++;
-							passosPorAndar++;
 						}
 						else{
 							movimento = 'r';
 							bolinha[2]++;
-							passosPorAndar++;
 						}
+						passosPorAndar[bolinha[0]]++;
 						break;
 					case 'r':
 						if(bolinha[2] != 4){
 							bolinha[2]++;
-							passosPorAndar++;
 						}
 						else{
 							movimento = 'l';
 							bolinha[2]--;
-							passosPorAndar++;
 						}
+						passosPorAndar[bolinha[0]]++;
 						break;
 					case 'l':
 						if(bolinha[2] != 0){
 							bolinha[2]--;
-							passosPorAndar++;
 						}
 						else{
 							movimento = 'u';
 							bolinha[1]--;
-							passosPorAndar++;
 						}
+						passosPorAndar[bolinha[0]]++;
 						break;
 				}
 			}
@@ -130,25 +147,22 @@ int main(){
 				switch(movimento){
 					case 'u':
 						bolinha[1]++;
-						passosPorAndar++;
 						movimento = 'd';
 						break;
 					case 'd':
 						bolinha[1]--;
-						passosPorAndar++;
 						movimento = 'r';
 						break;
 					case 'r':
 						bolinha[2]--;
-						passosPorAndar++;
 						movimento = 'l';
 						break;
 					case 'l':
-						bolinha[2]++;
-						passosPorAndar++;
+						bolinha[2]++;						
 						movimento = 'u';
 						break;
 				}
+				passosPorAndar[bolinha[0]]++;
 			}
 			
 			// guardar a distancia anterior para compara na proxima repeticao
@@ -171,43 +185,26 @@ int main(){
 				}
 				printf("\n");
 			}
-			printf("Passos: %d", passosPorAndar+contadorPassos);
+			for(i = 0; i <= bolinha[0]; i++){
+				printf("Passos no andar %d: %d\n", i, passosPorAndar[i]);
+			}
 			printf("\n");
 			sleep(1);
 		}
-		// o player desce um andar contando mais um passo
+		// o player desce um andar
 		bolinha[0]++;
-		passosPorAndar++;
 		
 		// reset das variaveis que controlam a direcao do player
 		movimento = 'u';
 		distanciaAux = 12;
 		
-		// soma a quantidade de passos no andar e depois reseta
-		contadorPassos += passosPorAndar;
-		passosPorAndar = 0;
+		// soma a quantidade de passos no andar
+		contadorPassos += passosPorAndar[bolinha[2]];
 	}while(bolinha[0] <= 9);
 	
 	// calcula e imprime a media de passos
 	float mediaPassos = (float)contadorPassos/10;
-	printf("\nMedia de passos por andar: %.2f", mediaPassos);
-	
-	// impressao da matriz
-//	for(i = 0; i < 10; i++){
-//		for(j = 0; j < 5; j++){
-//			for(k = 0; k < 5; k++){
-//				// imprimir x na posicao do player sem alterar a matriz dos andares
-//				if(i == bolinha[0] && j == bolinha[1] && k == bolinha[2]){
-//					printf("x "); 
-//				}
-//				else{
-//					printf("%c ", andares[i][j][k]);
-//				}
-//			}
-//			printf("\n");
-//		}
-//		printf("\n");
-//	}
+	printf("Media de passos por andar: %.1f", mediaPassos);
 }
 
 //Autores Ian Alves, Mateus Cajaiba e Pedro Henrique
