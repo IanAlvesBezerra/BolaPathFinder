@@ -51,7 +51,9 @@ int main(){
 			printf("\n");
 		}
 		printf("\n");
+		sleep(1);
 	}
+	printf("Iniciando simulacao...\n");
 	sleep(3);
 	system("cls");
 	
@@ -191,15 +193,16 @@ int main(){
 			printf("\n");
 			sleep(1);
 		}
+		
+		// soma a quantidade de passos no andar
+		contadorPassos += passosPorAndar[bolinha[0]];
+		
 		// o player desce um andar
 		bolinha[0]++;
 		
 		// reset das variaveis que controlam a direcao do player
 		movimento = 'u';
 		distanciaAux = 12;
-		
-		// soma a quantidade de passos no andar
-		contadorPassos += passosPorAndar[bolinha[2]];
 	}while(bolinha[0] <= 9);
 	
 	// calcula e imprime a media de passos
