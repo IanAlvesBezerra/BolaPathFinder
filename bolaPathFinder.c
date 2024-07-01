@@ -234,7 +234,7 @@ int main(){
 		
 		// reset das variaveis que controlam a direcao do player
 		movimento = 'u';
-		distanciaAux = 12;
+		distanciaAux = 8;
 	}while(bolinha[0] <= 9);
 	
 	// calcula e imprime a media de passos
