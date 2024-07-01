@@ -102,7 +102,7 @@ int main(){
 							bolinha[1]--;
 						}
 						else{
-							if(passosPorAndar[bolinha[0]] > 2){
+							if(passosPorAndar[bolinha[0]] > 2 && bolinha[2] != 4){
 								movimento = 'r';
 								bolinha[2]++;
 							}
@@ -117,9 +117,13 @@ int main(){
 						if(bolinha[1] != 4){
 							bolinha[1]++;
 						}
-						else{
+						else if(bolinha[2] != 4){
 							movimento = 'r';
 							bolinha[2]++;
+						}
+						else{
+							movimento = 'l';
+							bolinha[2]--;
 						}
 						passosPorAndar[bolinha[0]]++;
 						break;
@@ -137,9 +141,13 @@ int main(){
 						if(bolinha[2] != 0){
 							bolinha[2]--;
 						}
-						else{
+						else if(bolinha[1] != 0){
 							movimento = 'u';
 							bolinha[1]--;
+						}
+						else{
+							movimento = 'd';
+							bolinha[1]++;
 						}
 						passosPorAndar[bolinha[0]]++;
 						break;
