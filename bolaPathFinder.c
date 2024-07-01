@@ -74,6 +74,29 @@ int main(){
 	
 	// criacao do loop de busca da bolinha
 	do{
+		// imprime a bolinha na posicao inicial
+		system("cls");
+		printf("Bolinha: andar(%d) linha(%d) coluna(%d)\n", bolinha[0], bolinha[1], bolinha[2]);
+		printf("Movimento: %c\n", movimento);
+			
+		for(i = 0; i < 5; i++){
+			for(j = 0; j < 5; j++){
+				// imprimir 'O' na posicao do player sem alterar a matriz dos andares
+				if(i == bolinha[1] && j == bolinha[2]){
+					printf("O "); 
+				}
+				else{
+					printf("%c ", andares[bolinha[0]][i][j]);
+				}
+			}
+			printf("\n");
+		}
+		for(i = 0; i <= bolinha[0]; i++){
+			printf("Passos no andar %d: %d\n", i, passosPorAndar[i]);
+		}
+		printf("\n");
+		sleep(1);
+		
 		while(andares[bolinha[0]][bolinha[1]][bolinha[2]] != ' '){
 			// encontrar a posicao do buraco do andar do player
 			int buracoDoAndar[2];
