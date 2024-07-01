@@ -23,7 +23,7 @@ int main(){
 		posicaoDoBuraco[0] = rand() % 5;
 		posicaoDoBuraco[1] = rand() % 5;
 		
-		andares[i][posicaoDoBuraco[0]][posicaoDoBuraco[1]] = 'o';
+		andares[i][posicaoDoBuraco[0]][posicaoDoBuraco[1]] = ' ';
 	}
 	
 	// criacao do player
@@ -40,9 +40,9 @@ int main(){
 	for(i = 0; i < 10; i++){
 		for(j = 0; j < 5; j++){
 			for(k = 0; k < 5; k++){
-				// imprimir x na posicao do player sem alterar a matriz dos andares
+				// imprimir 'O' na posicao do player sem alterar a matriz dos andares
 				if(i == bolinha[0] && j == bolinha[1] && k == bolinha[2]){
-					printf("x "); 
+					printf("O "); 
 				}
 				else{
 					printf("%c ", andares[i][j][k]);
@@ -61,8 +61,8 @@ int main(){
 	char movimento = 'u';
 	
 	// iniciar as variaveis de controle de distancia 
-	// o auxiliar comeca como 12 pois e a maior distancia possivel
-	int distancia, distanciaAux = 12;
+	// o auxiliar comeca como 8 pois e a maior distancia possivel
+	int distancia, distanciaAux = 8;
 	
 	// iniciar as variaveis de contagem de passos
 	/* 
@@ -74,14 +74,15 @@ int main(){
 	
 	// criacao do loop de busca da bolinha
 	do{
-		while(andares[bolinha[0]][bolinha[1]][bolinha[2]] != 'o'){
+		while(andares[bolinha[0]][bolinha[1]][bolinha[2]] != ' '){
 			// encontrar a posicao do buraco do andar do player
 			int buracoDoAndar[2];
 			for(i = 0; i < 5; i++){
 				for(j = 0; j < 5; j++){
-					if(andares[bolinha[0]][i][j] == 'o'){
+					if(andares[bolinha[0]][i][j] == ' '){
 						buracoDoAndar[0] = i;
 						buracoDoAndar[1] = j;
+						break;
 					}
 				}
 			}
@@ -177,9 +178,9 @@ int main(){
 			
 			for(i = 0; i < 5; i++){
 				for(j = 0; j < 5; j++){
-					// imprimir x na posicao do player sem alterar a matriz dos andares
+					// imprimir 'O' na posicao do player sem alterar a matriz dos andares
 					if(i == bolinha[1] && j == bolinha[2]){
-						printf("x "); 
+						printf("O "); 
 					}
 					else{
 						printf("%c ", andares[bolinha[0]][i][j]);
